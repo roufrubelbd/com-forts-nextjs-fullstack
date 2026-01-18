@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@plugin "daisyui";
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+
+
+/* Force the root to behave as dark mode regardless of system settings */
+:root {
+  color-scheme: dark !important;
+}
+
+/* Optional: If you want to ensure the background is always deep dark */
+body {
+  background-color: oklch(var(--b1));
+  color: oklch(var(--bc));
+}
