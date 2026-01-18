@@ -1,165 +1,57 @@
-# Comforts — Full-Stack Product Management Website
+🛍️ COMFORTS — Full-Stack Product ManagementCOMFORTS is a high-end, full-stack e-commerce management platform designed with a modern Glassmorphism aesthetic. It provides a seamless experience for managing product inventories with a permanent, premium dark-themed interface.
 
-A full-stack web application built with **Next.js (frontend)** and **Express.js + MongoDB (backend)** for managing products.  
-Includes authentication, product creation, editing, deletion, and responsive UI design.
+🔗 Live Demo: Visit COMFORTS
 
-Website live link: https://comforts-products-management-fullst.vercel.app
+✨ Key Features
+🌑 Always Dark UI: A premium, high-contrast dark theme powered by DaisyUI and Tailwind v4.
+🔐 NextAuth Integration: Secure authentication via Google OAuth and Credentials provider.
+📦 Inventory Management: Full CRUD (Create, Read, Update, Delete) functionality for products.
+📱 Responsive Grid: Advanced layout (Mobile: 2 cols, Tablet: 3 cols, Desktop: 5 cols).
+🔍 Real-time Filtering: Search and filter products by category or title.
+💎 Modern UX: Glassmorphism effects, backdrop blurs, and Lucide icon integration.🛠️ Tech StackFrontendFramework: Next.js 15+ (App Router)Styling: Tailwind CSS v4 + DaisyUI (Dark Mode)Auth: NextAuth.jsIcons: Lucide React & React IconsFeedback: React Hot Toast & SweetAlert2BackendServer: Node.js & Express.jsDatabase: MongoDB Atlas (Mongoose/MongoDB Native)Deployment: Vercel (Frontend & Backend)
 
----
+🚀 Getting Started
 
-## Tech Stack
-
-### **Frontend**
-
-- ✔ Next.js 16.04 (App Router)
-- ✔ React 19
-- ✔ Tailwind CSS + DaisyUI
-- ✔ NextAuth (Google + Credentials)
-- ✔ React Hot Toast
-- ✔ SweetAlert2
-- ✔ Deployed on Vercel
-
-### **Backend**
-
-- ✔ Node.js
-- ✔ Express.js
-- ✔ MongoDB / MongoDB Atlas
-- ✔ CORS / JSON middleware
-- ✔ Deployed on Vercel
-
----
-
-## Features
-
-- ✔ User authentication (NextAuth)
-- ✔ Add new products
-- ✔ Edit existing products
-- ✔ Delete products
-- ✔ Dynamic product detail pages
-- ✔ Fully responsive UI (mobile-first)
-- ✔ Backend API connected with MongoDB Atlas
-
----
-
-# Setup & Installation
-
-## **1️⃣ Clone the Project**
-
-```sh
-git clone https://github.com/roufrubelbd/comforts_products_management_client.git
+1️⃣ Clone the RepositoryBashgit clone https://github.com/roufrubelbd/comforts_products_management_client.git
 cd comforts_products_management_client
 
+2️⃣ Frontend ConfigurationNavigate to the client folder and install dependencies:Bashnpm install
 
-2️⃣ Frontend Setup (Next.js)
-Go into comforts_products_management_client folder:
-cd comforts_products_management_client
-npm install
+Create a .env.local file in the root directory:Code snippet# NextAuth Configuration
 
-Create .env.local
-NEXTAUTH_SECRET=your-secret
-GOOGLE_CLIENT_ID=your-client-id
-GOOGLE_CLIENT_SECRET=your-client-secret
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your_random_secret
 
-# Backend API URL (local)
+# Google OAuth
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+
+# API Connection
 NEXT_PUBLIC_API_URL=http://localhost:5000
 
-Start frontend
-npm run dev
-
-
-Frontend runs at:
-
-http://localhost:3000
-
-3️⃣ Backend Setup (Express + MongoDB)
-Go into backend folder:
-cd backend
+3️⃣ Backend ConfigurationNavigate to the backend folder and install dependencies:Bashcd backend
 npm install
 
-Create .env in backend
-MONGO_URI=your-mongo-atlas-url
+Create a .env file in the backend directory:Code snippetMONGO_URI=your_mongodb_atlas_connection_string
 PORT=5000
 
-Start backend
-node index.js
+📂 Project StructurePlaintextcomforts/
+├── src/
+│   ├── app/                # Next.js App Router (v15+)
+│   │   ├── api/auth/       # NextAuth Route Handlers
+│   │   ├── products/       # Dynamic Product Catalog & Details
+│   │   └── layout.js       # Forced Dark Theme Config
+│   ├── components/         # Reusable UI (Logo, Navbar, Footer)
+│   └── lib/                # Database & Auth Configurations
+└── backend/
+    ├── index.js            # Express Server
+    └── .env                # Backend Secrets
 
 
-Backend runs at:
+🛡️ API Endpoints SummaryMethodEndpointDescriptionGET/productsFetch all products with search/filterGET/products/:idFetch detailed single product dataPOST/addCreate a new product (Protected)PATCH/products/:idUpdate product detailsDELETE/products/:idRemove product from database🎨 Global Styles (Permanent Dark Mode)To ensure the premium look, the project uses the following DaisyUI configuration:HTML<html lang="en" data-theme="dark">
+  <body className="bg-base-100 text-white">
+    {children}
+  </body>
+</html>
 
-http://localhost:5000
-
-🔗 API Route Summary (Backend)
-Products
-Method	Endpoint	Description
-GET	/products	Get all products
-GET	/products/:id	Get single product by ID
-POST	/add	Add new product
-PATCH	/products/:id	Update product
-DELETE	/products/:id	Delete product
-Auth (frontend)
-Method	Endpoint	Description
-GET	/api/signin	Login page
-GET	/api/signout	Logout
-GET	/api/auth/session	NextAuth session
-🌐 Deployment
-Frontend Deployment (Vercel)
-
-Push code to GitHub
-
-Import project into Vercel
-
-Add NEXT_PUBLIC_API_URL pointing to your backend
-
-Deploy
-
-Backend URL example:
-
-https://comfortsproductsmanagementwebsitese.vercel.app
-
-Backend Deployment (Vercel)
-
-Upload backend folder to GitHub
-
-Create new Web Service
-
-Set Build Command:
-
-npm install
-
-
-Set Start Command:
-
-node index.js
-
-
-Add Environment Variables
-
-Deploy
-
-You will get a live URL like:
-
-https://comfortsproductsmanagementwebsitese.vercel.app
-
-
-Use this URL in Next.js:
-
-NEXT_PUBLIC_API_URL=https://comfortsproductsmanagementwebsitese.vercel.app
-
-📁 Project Structure
-comforts/
-│
-├── frontend/          # Next.js frontend
-│   ├── app/
-│                   └──  api/auth  # NextAuth
-│   ├── components/
-│                               └── public/
-│
-└── backend/           # Express.js backend
-    ├── index.js
-    └── .env
-
-🙌 Contributing
-
-Pull requests are welcome.
-For major changes, please open an issue first to discuss what you’d like to improve.
-```
+🤝 ContributingFork the ProjectCreate your Feature Branch (git checkout -b feature/AmazingFeature)Commit your Changes (git commit -m 'Add some AmazingFeature')Push to the Branch (git push origin feature/AmazingFeature)Open a Pull Request📜 LicenseDistributed under the MIT License. See LICENSE for more information.Developed with ❤️ by Rouf Rubel
