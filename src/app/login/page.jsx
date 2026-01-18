@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-import { LogIn, Github } from "lucide-react";
+import { LogIn } from "lucide-react";
 
 // 1. Move the logic into a sub-component
 const LoginForm = () => {
