@@ -118,31 +118,3 @@ export default async function ProductDetails({ params }) {
 
 
 
-
-
-
-// // src/app/products/[id]/page.jsx
-// import { dbConnect } from "@/lib/mongodb";
-// import { ObjectId } from "mongodb";
-// import { notFound } from "next/navigation";
-
-// export default async function ProductDetails({ params }) {
-//   // 1. Await the params promise
-//   const resolvedParams = await params; 
-//   const id = resolvedParams.id;
-
-//   if (!id || !ObjectId.isValid(id)) return notFound();
-
-//   const productsCollection = await dbConnect("products");
-//   const product = await productsCollection.findOne({ _id: new ObjectId(id) });
-
-//   if (!product) return notFound();
-
-//   return (
-//     <div className="p-10">
-//       <h1 className="text-3xl font-bold">{product.title}</h1>
-//       <img src={product.image} alt={product.title} className="w-64 mt-4" />
-//       <p className="mt-4 text-xl">${product.price}</p>
-//     </div>
-//   );
-// }
