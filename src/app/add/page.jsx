@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import { PlusCircle, Image as ImageIcon, Tag, DollarSign, AlignLeft, X } from "lucide-react";
 
 export default function AddPage() {
   const router = useRouter();
@@ -17,7 +18,6 @@ export default function AddPage() {
     const product = Object.fromEntries(formData.entries());
 
     try {
-      // Points to our local API route
       const res = await fetch("/api/products", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,8 +30,8 @@ export default function AddPage() {
         throw new Error(data.message || "Failed to add product");
       }
 
-      toast.success("Product added successfully");
-      router.push("/products"); // Redirect to the gallery
+      toast.success("Product listed successfully!");
+      router.push("/products");
       router.refresh();
     } catch (err) {
       toast.error(err.message);
@@ -41,61 +41,132 @@ export default function AddPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-teal-600">Add New Product</h1>
-        <Link href="/products" className="btn btn-ghost btn-sm">Cancel</Link>
-      </div>
-
-      <div className="card bg-base-100 shadow-xl border border-teal-100">
-        <form onSubmit={handleSubmit} className="card-body gap-4">
-          <div className="form-control">
-            <label className="label font-semibold">Product Title</label>
-            <input name="title" className="input input-bordered focus:border-teal-500" placeholder="e.g. Silk Cushion Cover" required />
+    <div className="min-h-screen bg-base-100 py-12 px-4 md:px-0">
+      <div className="max-w-3xl mx-auto">
+        
+        {/* Header Section */}
+        <div className="flex justify-between items-end mb-10 px-2">
+          <div>
+            <span className="text-teal-500 font-bold tracking-widest text-xs uppercase">Inventory Management</span>
+            <h1 className="text-4xl font-black text-white mt-1">Add New Product</h1>
           </div>
+          <Link 
+            href="/products" 
+            className="btn btn-ghost btn-circle hover:bg-red-500/10 hover:text-red-500 transition-all"
+          >
+            <X size={24} />
+          </Link>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Form Card */}
+        <div className="card bg-base-200/40 backdrop-blur-xl border border-white/5 shadow-2xl overflow-hidden">
+          <form onSubmit={handleSubmit} className="card-body p-6 md:p-10 gap-6">
+            
+            {/* Title Field */}
             <div className="form-control">
-              <label className="label font-semibold">Category</label>
-              <select name="category" className="select select-bordered">
-                <option value="Home Decor">Home Decor</option>
-                <option value="Bags">Bags</option>
-                <option value="Kids">Kids</option>
-                <option value="Women">Women</option>
-                <option value="Men">Men</option>
-              </select>
+              <label className="label text-xs uppercase tracking-widest font-bold text-gray-500">Product Title</label>
+              <div className="relative">
+                <Tag className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
+                <input 
+                  name="title" 
+                  className="input bg-base-100 border-white/10 w-full pl-12 focus:border-teal-500 focus:outline-none rounded-xl h-12" 
+                  placeholder="e.g. Classic Cotton Tee" 
+                  required 
+                />
+              </div>
             </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Category Field */}
+              <div className="form-control">
+                <label className="label text-xs uppercase tracking-widest font-bold text-gray-500">Category</label>
+                <select 
+                  name="category" 
+                  className="select bg-base-100 border-white/10 w-full focus:border-teal-500 focus:outline-none rounded-xl h-12"
+                >
+                  <option value="Men">Men's Fashion</option>
+                  <option value="Women">Women's Fashion</option>
+                  <option value="Kids">Kids' Collection</option>
+                  <option value="Accessories">Accessories</option>
+                  <option value="Home Decor">Home Decor</option>
+                </select>
+              </div>
+
+              {/* Price Field */}
+              <div className="form-control">
+                <label className="label text-xs uppercase tracking-widest font-bold text-gray-500">Price ($)</label>
+                <div className="relative">
+                  <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 text-teal-500" size={18} />
+                  <input 
+                    name="price" 
+                    type="number" 
+                    step="0.01" 
+                    className="input bg-base-100 border-white/10 w-full pl-12 focus:border-teal-500 focus:outline-none rounded-xl h-12 font-bold" 
+                    placeholder="0.00" 
+                    required 
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Short Description */}
             <div className="form-control">
-              <label className="label font-semibold">Price ($)</label>
-              <input name="price" type="number" step="0.01" className="input input-bordered" placeholder="29.99" required />
+              <label className="label text-xs uppercase tracking-widest font-bold text-gray-500">Short Description</label>
+              <input 
+                name="desc" 
+                className="input bg-base-100 border-white/10 w-full focus:border-teal-500 focus:outline-none rounded-xl h-12" 
+                placeholder="High-quality cotton T-shirt perfect for everyday wear." 
+                required 
+              />
             </div>
-          </div>
 
-          <div className="form-control">
-            <label className="label font-semibold">Short Description</label>
-            <input name="desc" className="input input-bordered" placeholder="Brief catchphrase" required />
-          </div>
+            {/* Full Description */}
+            <div className="form-control">
+              <label className="label text-xs uppercase tracking-widest font-bold text-gray-500">Full Details</label>
+              <div className="relative">
+                <AlignLeft className="absolute left-4 top-4 text-gray-500" size={18} />
+                <textarea 
+                  name="longDesc" 
+                  className="textarea bg-base-100 border-white/10 w-full pl-12 focus:border-teal-500 focus:outline-none rounded-xl h-32 pt-3" 
+                  placeholder="Tell your customers more about this item..."
+                ></textarea>
+              </div>
+            </div>
 
-          <div className="form-control">
-            <label className="label font-semibold">Full Description</label>
-            <textarea name="longDesc" className="textarea textarea-bordered h-24" placeholder="Detailed product specifications..."></textarea>
-          </div>
+            {/* Image URL */}
+            <div className="form-control">
+              <label className="label text-xs uppercase tracking-widest font-bold text-gray-500">Product Image URL</label>
+              <div className="relative">
+                <ImageIcon className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
+                <input 
+                  name="image" 
+                  type="url" 
+                  className="input bg-base-100 border-white/10 w-full pl-12 focus:border-teal-500 focus:outline-none rounded-xl h-12 text-sm text-teal-400" 
+                  placeholder="https://i.postimg.cc/..." 
+                  required
+                />
+              </div>
+            </div>
 
-          <div className="form-control">
-            <label className="label font-semibold">Image URL</label>
-            <input name="image" type="url" className="input input-bordered" placeholder="https://images.unsplash.com/..." />
-          </div>
-
-          <div className="card-actions mt-4">
-            <button 
-              type="submit" 
-              className="btn bg-teal-600 hover:bg-teal-700 text-white w-full border-none"
-              disabled={loading}
-            >
-              {loading ? <span className="loading loading-spinner"></span> : "List Product"}
-            </button>
-          </div>
-        </form>
+            {/* Submit Button */}
+            <div className="mt-6">
+              <button 
+                type="submit" 
+                className="btn btn-teal-600 bg-teal-600 hover:bg-teal-500 border-none text-white w-full h-14 rounded-2xl font-black text-lg shadow-lg shadow-teal-900/30 transition-all active:scale-95 flex gap-3"
+                disabled={loading}
+              >
+                {loading ? (
+                  <span className="loading loading-spinner"></span>
+                ) : (
+                  <>
+                    <PlusCircle size={22} />
+                    List Product
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

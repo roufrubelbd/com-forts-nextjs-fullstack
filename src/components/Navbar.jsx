@@ -4,7 +4,8 @@ import React from "react";
 import { useSession, signOut } from "next-auth/react";
 import { 
   LayoutDashboard, PlusCircle, Settings, LogOut, 
-  ChevronDown, Sparkles, Flame, Search, ShoppingCart
+  ChevronDown, Sparkles, Flame, Search, ShoppingCart,
+  User
 } from "lucide-react";
 import Logo from "./Logo";
 
@@ -20,6 +21,7 @@ const Navbar = () => {
     { name: "Accessories", href: "/products?category=Accessories" },
     { name: "New Arrivals", href: "/products?filter=new", icon: <Sparkles size={14} /> },
     { name: "Best Sellers", href: "/products?filter=hot", icon: <Flame size={14} /> },
+    { name: "Settings", href: "/settings", icon: <Settings size={14} /> },
   ];
 
   return (
@@ -84,6 +86,7 @@ const Navbar = () => {
                 <p className="font-bold text-teal-500 truncate">{session?.user?.name}</p>
               </div>
               
+              <li><Link href="/dashboard" className="py-3 flex gap-3 hover:text-teal-500 transition-all"><User size={18} /> My Dashboard</Link></li>
               <li><Link href="/add" className="py-3 flex gap-3 hover:text-teal-500 transition-all"><PlusCircle size={18} /> Add Product</Link></li>
               <li><Link href="/manage" className="py-3 flex gap-3 hover:text-teal-500 transition-all"><LayoutDashboard size={18} /> Inventory</Link></li>
               <li><Link href="/settings" className="py-3 flex gap-3 hover:text-teal-500 transition-all"><Settings size={18} /> Settings</Link></li>
