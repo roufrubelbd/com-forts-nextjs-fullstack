@@ -43,7 +43,7 @@ const categories = [
 
 export default function FeaturedCategories() {
   return (
-    <section className="py-10 px-6 md:px-16 lg:px-24">
+    <section className="py-10 px-4 md:px-12 lg:px-20">
       <h2 className="text-center text-3xl font-semibold py-16 text-amber-500 " >
         Featured Categories
       </h2>

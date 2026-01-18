@@ -17,7 +17,7 @@ export default async function ProductsPage({ searchParams }) {
   const products = await productsCollection.find(query).toArray();
 
   return (
-    <div className="px-4 md:px-10 lg:px-16 pb-20 pt-10 bg-base-100 min-h-screen">
+    <div className="px-4 md:px-12 lg:px-20 pb-10 pt-10 bg-base-100 min-h-screen">
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
         <div>
